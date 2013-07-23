@@ -18,19 +18,8 @@ public class BookDetail extends javax.swing.JFrame {
     public BookDetail() {
         initComponents();
     }
-
-    public BookDetail( ArrayList<String> bookParsedResults) {
-      
-        this.bookId=Long.parseLong(bookParsedResults.get(6));
-        
-        initComponents();
-         this.jLabel1.setText(bookParsedResults.get(0));
-         this.jLabel2.setText(bookParsedResults.get(1));
-         this.jLabel3.setText(bookParsedResults.get(2));
-         this.jLabel4.setText(bookParsedResults.get(3));
-         this.jLabel5.setText(bookParsedResults.get(4));
-         this.jLabel6.setText(bookParsedResults.get(5));
-    }
+  
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -248,6 +237,18 @@ public class BookDetail extends javax.swing.JFrame {
      */
     public long getBookId() {
         return bookId;
+    }
+
+    public void setFields(ArrayList<String> bookParsedResults){
+        
+        this.bookId=Long.parseLong(bookParsedResults.get(6));
+        
+        this.jLabel1.setText(bookParsedResults.get(0));
+        this.jLabel2.setText(bookParsedResults.get(1));
+        this.jLabel3.setText(bookParsedResults.get(2));
+        this.jLabel4.setText(bookParsedResults.get(3));
+        this.jLabel5.setText(bookParsedResults.get(4));
+        this.jLabel6.setText(bookParsedResults.get(5));
     }
 
 }

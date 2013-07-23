@@ -16,7 +16,7 @@ public class InterfaceController {
     static ConnectorDAO connectorDAO =new ConnectorDAO();
     static InsertConsole insConsole = new  InsertConsole();
     static BrowserConsole browserConsole = new  BrowserConsole();
-    static BookDetail bookDetail ;
+    static BookDetail bookDetail= new BookDetail() ;
     
     public InterfaceController(){
          MainConsole mc = new MainConsole(); 
@@ -52,7 +52,7 @@ public class InterfaceController {
        parsedBook.add(String.valueOf(returnedBook.getPvp()));
        parsedBook.add(String.valueOf(returnedBook.getId()));
         
-       bookDetail=new BookDetail(parsedBook);
+       bookDetail.setFields(parsedBook);
        bookDetail.setLocationRelativeTo(null);  
        bookDetail.setVisible(true);
    }
