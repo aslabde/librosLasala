@@ -28,7 +28,7 @@ public class ConnectorDAO {
             throw he; 
         } finally  { 
        
-           // sesion.close(); 
+            sesion.close(); 
         }  
 
         return id; 

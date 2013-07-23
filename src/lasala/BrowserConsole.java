@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -122,11 +124,10 @@ public class BrowserConsole extends javax.swing.JFrame {
        names.add("Id");
           
      results = InterfaceController.getListBooks(s1); 
-     
-     System.out.println(results.toString());
-                 
+    
+                     
      MyTableModel tmod = new MyTableModel(results, names);
-     JTable table = new JTable(tmod);
+     final JTable table = new JTable(tmod);
      JScrollPane js = new JScrollPane(table);
      
     
@@ -135,6 +136,17 @@ public class BrowserConsole extends javax.swing.JFrame {
     jPanel1.setLayout(new FlowLayout());     
     
    
+    
+    table.addMouseListener(new MouseAdapter() {
+   public void mouseClicked(MouseEvent e) {
+      if (e.getClickCount() == 2) {
+         JTable target = (JTable)e.getSource();
+         int row = target.getSelectedRow();
+         int column = target.getSelectedColumn();
+        JOptionPane.showMessageDialog(null, table.getValueAt(row, column));
+         }
+   }
+});
            
              
     }//GEN-LAST:event_jButton1ActionPerformed
