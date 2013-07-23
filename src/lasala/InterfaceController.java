@@ -16,6 +16,7 @@ public class InterfaceController {
     static ConnectorDAO connectorDAO =new ConnectorDAO();
     static InsertConsole insConsole = new  InsertConsole();
     static BrowserConsole browserConsole = new  BrowserConsole();
+    static BookDetail bookDetail ;
     
     public InterfaceController(){
          MainConsole mc = new MainConsole(); 
@@ -37,6 +38,22 @@ public class InterfaceController {
     browserConsole.setLocationRelativeTo(null);  
     browserConsole.setVisible(true);
     }
+   
+   public static void buildBookDetail(long id){
+       ArrayList<String> parsedBook = new ArrayList<String>();
+       
+       Libro returnedBook= connectorDAO.getLibro(id);
+     
+       parsedBook.add(returnedBook.getTitulo());
+       parsedBook.add(returnedBook.getAutor());
+       parsedBook.add(returnedBook.getEditorial());
+       parsedBook.add(String.valueOf(returnedBook.getNetoCompra()));
+       parsedBook.add(String.valueOf(returnedBook.getPvp()));
+        
+       bookDetail=new BookDetail(parsedBook);
+       bookDetail.setLocationRelativeTo(null);  
+       bookDetail.setVisible(true);
+   }
     
    public static void saveBook(ArrayList<String> userInput) throws HibernateException{
     

@@ -151,12 +151,12 @@ public class BrowserConsole extends javax.swing.JFrame {
       if (e.getClickCount() == 2) {
          JTable target = (JTable)e.getSource();
          int row = target.getSelectedRow();
-         int column = target.getSelectedColumn();
-        JOptionPane.showMessageDialog(null, table.getValueAt(row, column));
+         int column =table.getColumnCount() - 1;
+         InterfaceController.buildBookDetail(Long.parseLong(table.getValueAt(row, column).toString()));      
          }
    }
 });
-           
+        
              
     }//GEN-LAST:event_jButton1ActionPerformed
 
