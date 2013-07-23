@@ -85,6 +85,7 @@ public class InterfaceController {
                 parsedResults.add(l.getIsbn());
                 parsedResults.add(String.valueOf(l.getNetoCompra()));
                 parsedResults.add(String.valueOf(l.getPvp()));
+                parsedResults.add(String.valueOf(l.getId()));
 
             }
      }                

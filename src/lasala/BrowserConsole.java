@@ -119,6 +119,7 @@ public class BrowserConsole extends javax.swing.JFrame {
        names.add("ISBN");
        names.add("Neto Compra");
        names.add("P.V.P.");
+       names.add("Id");
           
      results = InterfaceController.getListBooks(s1); 
      
