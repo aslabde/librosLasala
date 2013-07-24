@@ -19,8 +19,13 @@ public class Distribuidora implements Serializable {
         
     }        
 
-     public Distribuidora(long id, String name,  List<Libro> books){
-         this.id=id;
+     public Distribuidora(String name){
+         this.name=name;
+      
+     }   
+    
+    
+     public Distribuidora(String name,  List<Libro> books){
          this.name=name;
          this.books=books;
      }   

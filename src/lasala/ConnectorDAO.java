@@ -121,6 +121,32 @@ public class ConnectorDAO {
         return listLibros; 
     }  
      
+     public  long saveDistribuidora(Distribuidora distribuidora) throws HibernateException { 
+   
+        long id = 0;  
+
+        try { 
+        
+          beginOperation(); 
+            id = (Long) sesion.save(distribuidora); 
+            tx.commit(); 
+        } catch (HibernateException he) { 
+        
+            handleException(he); 
+            throw he; 
+        } finally  { 
+       
+            sesion.close(); 
+        }  
+
+        return id; 
+    }  
+     
+     
+     
+     
+     
+     
     public HashMap getDistributorMap () throws HibernateException {
         HashMap distribuidoras = new HashMap();
         List<Distribuidora> returnedDistributorsList = null;
