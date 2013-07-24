@@ -15,7 +15,7 @@
              <property name="netoCompra"  />
              <property name="pvp"  />
         
-             <many_to_one name="distribuidora" colum="ID_DISTRIBUIDORA" />
+             <many-to-one name="distribuidora" column="ID_DISTRIBUIDORA" />
              
     </class> 
     
