@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
     <class name="lasala.Libro" table="LIBROS">
-        <id name="id" column="ID">
+        <id name="id" column="ID_LIBRO">
             <generator class="identity" />
         </id>
              <property name="titulo"   />
@@ -15,6 +15,8 @@
              <property name="netoCompra"  />
              <property name="pvp"  />
         
+             <many_to_one name="distribuidora" colum="ID_DISTRIBUIDORA" />
+             
     </class> 
     
     

@@ -2,6 +2,7 @@
 
 package lasala;
 
+import java.util.HashMap;
 import org.hibernate.*; 
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -119,6 +120,56 @@ public class ConnectorDAO {
 
         return listLibros; 
     }  
+     
+    public HashMap getDistributorMap () throws HibernateException {
+        HashMap distribuidoras = new HashMap();
+        List<Distribuidora> returnedDistributorsList = null;
+        
+         try 
+        { 
+            beginOperation(); 
+            returnedDistributorsList = sesion.createQuery("from Distribuidora").list(); 
+           
+        } finally 
+        { 
+            sesion.close(); 
+        }  
+         
+         for (Distribuidora d: returnedDistributorsList){
+             distribuidoras.put(d.getId(), d.getName());
+         }
+        
+        return distribuidoras;
+    }
+     
+    public Distribuidora getDistributor(long idDistribuidora) throws HibernateException {
+        
+         Distribuidora distribuidora = null;  
+        try 
+        { 
+            beginOperation(); 
+            distribuidora = (Distribuidora) sesion.get(Distribuidora.class, idDistribuidora); 
+        } finally 
+        { 
+            sesion.close(); 
+        }  
+
+        return distribuidora; 
+        
+    }
+    
+    public void updateDistributorBooksList(Libro book, Distribuidora distributor){
+        
+        try{
+            beginOperation(); 
+            distributor.addBooktoDistributor(book);
+            sesion.update(distributor);
+        }finally{
+            sesion.close();
+        }
+     
+    }
+    
 
     private void beginOperation() throws HibernateException 
     { 

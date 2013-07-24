@@ -67,6 +67,8 @@ public class InterfaceController {
        String pvpParS = userInput.get(5);
        Double netoPar = null;
        Double pvpPar = null;
+       long distribuidoraId=0;
+       String distribuidoraParS = userInput.get(6); //Distributor id
        
        if(netoParS != null){
             netoPar = Double.parseDouble(netoParS);
@@ -75,12 +77,19 @@ public class InterfaceController {
       if(pvpParS != null){
             pvpPar = Double.parseDouble(pvpParS);
        }
-       
-       Libro bookToSave = new Libro(tituloPar, autorPar, editorialPar, isbnPar, netoPar, pvpPar );
-       
+     
+      
       try{
-           connectorDAO.saveLibro(bookToSave);
-            JOptionPane.showMessageDialog(null, "datos guardados correctamente");
+        distribuidoraId = Long.parseLong(distribuidoraParS); //Parse dist ID
+        Distribuidora currentDistributorSelected=connectorDAO.getDistributor(distribuidoraId);//Get Distribuidora
+       
+        Libro bookToSave = new Libro(tituloPar, autorPar, editorialPar, isbnPar, netoPar, pvpPar,
+                                                     currentDistributorSelected);
+              
+      
+         connectorDAO.saveLibro(bookToSave);
+         connectorDAO.updateDistributorBooksList( bookToSave, currentDistributorSelected);
+         JOptionPane.showMessageDialog(null, "datos guardados correctamente");
                       
       }
        catch (HibernateException he) { 

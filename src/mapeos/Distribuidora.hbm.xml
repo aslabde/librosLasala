@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="lasala.Distribuidora" table="DISTRIBUIDORAS" dynamic-update="true">
+        <id name="id" column="ID_DISTRIBUIDORA">
+            <generator class="identity" />
+        </id>
+             <property name="name"   />
+             
+             <list name="books" cascade="none">
+                 <key column="ID_DISTRIBUIDORA" />
+                 <index column="ORDEN" />
+                 <one-to-many class="lasala.Libro" />
+                 
+                 
+             </list>
+        
+    </class> 
+    
+    
+    
+</hibernate-mapping>

@@ -18,13 +18,14 @@ public class Libro implements Serializable{
    private double netoCompra;
    private double pvp;
    //bookStatus
-   //distribuidora
+   private Distribuidora distribuidora;
    
    public Libro(){
       
    }
 
-   public Libro (String titulo, String autor, String editorial, String isbn, double netoCompra, double pvp){
+   public Libro (String titulo, String autor, String editorial, String isbn, double netoCompra, double pvp,
+                         Distribuidora distribuidora){
        
        this.titulo=titulo;
        this.autor=autor;
@@ -32,6 +33,7 @@ public class Libro implements Serializable{
        this.isbn=isbn;
        this.netoCompra=netoCompra;       
        this.pvp=pvp;
+       this.distribuidora=distribuidora;
    }
 
     /**
