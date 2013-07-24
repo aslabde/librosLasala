@@ -133,6 +133,20 @@ public class Libro implements Serializable{
     public void setId(long id) {
         this.id = id;
     }
+
+    /**
+     * @return the distribuidora
+     */
+    public Distribuidora getDistribuidora() {
+        return distribuidora;
+    }
+
+    /**
+     * @param distribuidora the distribuidora to set
+     */
+    public void setDistribuidora(Distribuidora distribuidora) {
+        this.distribuidora = distribuidora;
+    }
    
    
 
