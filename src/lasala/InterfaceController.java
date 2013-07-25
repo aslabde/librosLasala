@@ -16,7 +16,8 @@ public class InterfaceController {
     static ConnectorDAO connectorDAO =new ConnectorDAO();
     static InsertConsole insConsole = new  InsertConsole();
     static BrowserConsole browserConsole = new  BrowserConsole();
-    static BookDetail bookDetail= new BookDetail() ;
+    static BookDetail bookDetail= new BookDetail();
+    static NewDistributorConsole newDistributorConsole = new NewDistributorConsole();
     
     public InterfaceController(){
          MainConsole mc = new MainConsole(); 
@@ -40,6 +41,13 @@ public class InterfaceController {
     browserConsole.setLocationRelativeTo(null);  
     browserConsole.setVisible(true);
     }
+   
+   public static  void buildNewDistributorConsole(){
+    newDistributorConsole.clearUI(); 
+    newDistributorConsole.setLocationRelativeTo(null);  
+    newDistributorConsole.setVisible(true);
+    }
+   
    
    public static void buildBookDetail(long id){
        ArrayList<String> parsedBook = new ArrayList<String>();
