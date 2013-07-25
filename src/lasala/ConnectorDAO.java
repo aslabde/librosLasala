@@ -200,7 +200,7 @@ public class ConnectorDAO {
      
     }
     
-
+      
     private void beginOperation() throws HibernateException 
     { 
         sesion = HibernateUtil.getSessionFactory().openSession();
