@@ -76,6 +76,10 @@ public class ConnectorDAO {
         { 
             beginOperation(); 
             libro = (Libro) sesion.get(Libro.class, idLibro); 
+       } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he; 
         } finally 
         { 
             sesion.close(); 
@@ -92,7 +96,10 @@ public class ConnectorDAO {
         { 
             beginOperation(); 
             listLibros = sesion.createQuery("from Libro").list(); 
-           
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he;    
         } finally 
         { 
             sesion.close(); 
@@ -112,7 +119,10 @@ public class ConnectorDAO {
             Criteria cr =sesion.createCriteria(Libro.class);
             cr.add(Restrictions.ilike("titulo","%"+searchQuery+"%" ));
             listLibros=cr.list();
-                    
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he;             
         } finally 
         { 
              sesion.close(); 
@@ -153,7 +163,10 @@ public class ConnectorDAO {
         { 
             beginOperation(); 
             returnedDistributorsList = sesion.createQuery("from Distribuidora").list(); 
-           
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he;    
         } finally 
         { 
             sesion.close(); 
@@ -173,6 +186,10 @@ public class ConnectorDAO {
         { 
             beginOperation(); 
             distribuidora = (Distribuidora) sesion.get(Distribuidora.class, idDistribuidora); 
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he; 
         } finally 
         { 
             sesion.close(); 

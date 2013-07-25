@@ -23,6 +23,8 @@ public class InterfaceController {
                
         mc.setLocationRelativeTo(null);       
         mc.setVisible(true);
+        
+               
     }
     
  
@@ -78,25 +80,23 @@ public class InterfaceController {
             pvpPar = Double.parseDouble(pvpParS);
        }
      
-      
-      try{
+    
         distribuidoraId = Long.parseLong(distribuidoraParS); //Parse dist ID
         Distribuidora currentDistributorSelected=connectorDAO.getDistributor(distribuidoraId);//Get Distribuidora
-       
+                            
+                                 
+        
         Libro bookToSave = new Libro(tituloPar, autorPar, editorialPar, isbnPar, netoPar, pvpPar,
                                                      currentDistributorSelected);
-              
-      
+          
+                                            
          connectorDAO.saveLibro(bookToSave);
-         connectorDAO.updateDistributorBooksList( bookToSave, currentDistributorSelected);
-         JOptionPane.showMessageDialog(null, "datos guardados correctamente");
+         currentDistributorSelected.addBook(bookToSave);
+         connectorDAO.updateDistributor(currentDistributorSelected);
+        
+        JOptionPane.showMessageDialog(null, "datos guardados correctamente");
                       
-      }
-       catch (HibernateException he) { 
-         
-            throw he; 
-            
-        }
+     
    }
    
    public static ArrayList getListBooks(String sQuery){
