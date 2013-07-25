@@ -131,7 +131,7 @@ public class ConnectorDAO {
         return listLibros; 
     }  
      
-     public  long saveDistribuidora(Distribuidora distribuidora) throws HibernateException { 
+    public  long saveDistributor(Distribuidora distribuidora) throws HibernateException { 
    
         long id = 0;  
 
@@ -151,8 +151,6 @@ public class ConnectorDAO {
 
         return id; 
     }  
-     
-    
      
      
     public HashMap getDistributorMap () throws HibernateException {

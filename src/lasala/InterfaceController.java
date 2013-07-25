@@ -129,5 +129,12 @@ public class InterfaceController {
        
    }
    
- 
+ public static void saveDistributor(String distName){
+     
+     Distribuidora newDistributor = new Distribuidora(distName);
+     connectorDAO.saveDistributor(newDistributor);
+      JOptionPane.showMessageDialog(null, "datos guardados correctamente");
+ }
+   
+   
 }
