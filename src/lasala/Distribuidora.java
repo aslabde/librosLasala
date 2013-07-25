@@ -30,8 +30,8 @@ public class Distribuidora implements Serializable {
          this.books=books;
      }   
      
-     public void addBooktoDistributor(Libro book){
-         this.getBooks().add(book);
+     public void addBook(Libro book){
+         this.books.add(book);
      }
 
     /**
