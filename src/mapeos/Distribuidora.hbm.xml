@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="lasala.Distribuidora" table="DISTRIBUIDORAS" dynamic-update="true">
+    <class name="lasala.Distribuidora" table="DISTRIBUIDORAS" >
         <id name="id" column="ID_DISTRIBUIDORA">
             <generator class="identity" />
         </id>
