@@ -142,9 +142,7 @@ public class ConnectorDAO {
         return id; 
     }  
      
-     
-     
-     
+    
      
      
     public HashMap getDistributorMap () throws HibernateException {
@@ -184,15 +182,21 @@ public class ConnectorDAO {
         
     }
     
-    public void updateDistributorBooksList(Libro book, Distribuidora distributor){
+    public void updateDistributor(Distribuidora distributor){
         
-        try{
+        try  { 
+       
             beginOperation(); 
-            distributor.addBooktoDistributor(book);
-            sesion.update(distributor);
-        }finally{
-            sesion.close();
-        }
+            sesion.update(distributor); 
+            tx.commit(); 
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he; 
+        } finally 
+        { 
+            sesion.close(); 
+        } 
      
     }
     

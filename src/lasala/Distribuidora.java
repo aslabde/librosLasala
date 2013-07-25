@@ -25,7 +25,7 @@ public class Distribuidora implements Serializable {
      }   
     
     
-     public Distribuidora(String name,  List<Libro> books){
+     public Distribuidora(String name,  ArrayList<Libro> books){
          this.name=name;
          this.books=books;
      }   
@@ -72,7 +72,7 @@ public class Distribuidora implements Serializable {
     /**
      * @param books the books to set
      */
-    public void setBooks(ArrayList<Libro> books) {
+    public void setBooks(List<Libro> books) {
         this.books = books;
     }
      
