@@ -10,7 +10,7 @@
         </id>
              <property name="name"   />
              
-             <list name="books" cascade="none">
+             <list name="books" cascade="none" lazy="false" >
                  <key column="ID_DISTRIBUIDORA" />
                  <index column="ORDEN" />
                  <one-to-many class="lasala.Libro" />
