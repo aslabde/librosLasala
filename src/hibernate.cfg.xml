@@ -17,6 +17,7 @@
         
                
         <mapping resource="mapeos/Libro.hbm.xml"/>
+        <mapping resource="mapeos/Distribuidora.hbm.xml"/>
         
     </session-factory>    
 </hibernate-configuration>
