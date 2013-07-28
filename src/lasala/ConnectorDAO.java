@@ -2,7 +2,10 @@
 
 package lasala;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import org.hibernate.*; 
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -154,8 +157,9 @@ public class ConnectorDAO {
      
      
     public HashMap getDistributorMap () throws HibernateException {
-        HashMap distribuidoras = new HashMap();
+        LinkedHashMap distribuidoras = new LinkedHashMap();
         List<Distribuidora> returnedDistributorsList = null;
+        List<String> sortedDistributorNamesList = new ArrayList<>();
         
          try 
         { 
@@ -169,11 +173,15 @@ public class ConnectorDAO {
         { 
             sesion.close(); 
         }  
-         
+     
+         //Sorting results
+        Collections.sort(returnedDistributorsList, new DistribuidoraComparator());
+      
+         //Creates new map<id,name>
          for (Distribuidora d: returnedDistributorsList){
-             distribuidoras.put(d.getId(), d.getName());
+             distribuidoras.put(d.getId(), d.getName()); 
          }
-        
+       
         return distribuidoras;
     }
      
