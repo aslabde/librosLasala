@@ -12,6 +12,7 @@ package lasala;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import org.hibernate.HibernateException;
 
@@ -196,6 +197,10 @@ public class InsertConsole extends javax.swing.JFrame {
         InputResults.add(jTextField4.getText());
         InputResults.add(jTextField5.getText());
         InputResults.add(jTextField6.getText());
+        InputResults.add(this.distNames.get(jComboBox2.getSelectedItem()).toString());
+        
+        
+        
         
       try{  
      InterfaceController.saveBook(InputResults);
@@ -219,10 +224,11 @@ public class InsertConsole extends javax.swing.JFrame {
        jTextField6.setText("");
     }
             
-    public void initValues(HashMap<Long, String> distributors){
-        List<String> distNames = new ArrayList<String>(distributors.values());
+    public void initValues(LinkedHashMap<String, Long> distributors){
+       List<String> tempNames= new ArrayList(distributors.keySet());
+        this.distNames = distributors;
         
-        for(String s: distNames){
+        for(String s: tempNames){
             this.jComboBox2.addItem(s);
         }
     }
@@ -300,7 +306,7 @@ public class InsertConsole extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
-  
+  LinkedHashMap<String,Long> distNames = new LinkedHashMap<>();
     
 
 public boolean isNumerical(char c){

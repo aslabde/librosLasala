@@ -156,7 +156,7 @@ public class ConnectorDAO {
     }  
      
      
-    public HashMap getDistributorMap () throws HibernateException {
+    public LinkedHashMap getDistributorMap () throws HibernateException {
         LinkedHashMap distribuidoras = new LinkedHashMap();
         List<Distribuidora> returnedDistributorsList = null;
         List<String> sortedDistributorNamesList = new ArrayList<>();
@@ -179,7 +179,7 @@ public class ConnectorDAO {
       
          //Creates new map<id,name>
          for (Distribuidora d: returnedDistributorsList){
-             distribuidoras.put(d.getId(), d.getName()); 
+             distribuidoras.put( d.getName(),d.getId()); 
          }
        
         return distribuidoras;

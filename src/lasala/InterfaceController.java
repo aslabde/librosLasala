@@ -5,6 +5,7 @@ package lasala;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
@@ -32,7 +33,7 @@ public class InterfaceController {
     
  
    public static  void buildInsertConsole(){
-     HashMap distNames = connectorDAO.getDistributorMap();
+     LinkedHashMap distNames = connectorDAO.getDistributorMap();
      
      
     insConsole.initValues(distNames);
