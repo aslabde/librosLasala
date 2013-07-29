@@ -138,12 +138,35 @@ public class InterfaceController {
        
    }
    
- public static void saveDistributor(String distName){
+   public void changeBookStatus(Long id, EnumeratedStatus newStatus){
+       
+       Libro bookToUpdate=connectorDAO.getLibro(id);
+       switch(newStatus){
+           case AVAILABLE: bookToUpdate.setAvailable();
+                                                         break;
+            
+           case RETURNED: bookToUpdate.setReturned();
+                                                         break;
+          
+           case SOLD_OUT: bookToUpdate.setSold();
+                                                         break;
+           } 
+       
+          connectorDAO.updateLibro(bookToUpdate);
+   }
+   
+   
+    public static void saveDistributor(String distName){
      
-     Distribuidora newDistributor = new Distribuidora(distName);
-     connectorDAO.saveDistributor(newDistributor);
-      JOptionPane.showMessageDialog(null, "datos guardados correctamente");
- }
+        Distribuidora newDistributor = new Distribuidora(distName);
+        connectorDAO.saveDistributor(newDistributor);
+         JOptionPane.showMessageDialog(null, "datos guardados correctamente");
+     }
    
-   
+    public void runTestScript(){
+        
+        
+        
+    }
+    
 }
