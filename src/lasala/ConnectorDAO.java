@@ -200,7 +200,7 @@ public class ConnectorDAO {
         { 
             sesion.close(); 
         }  
-
+      
         return distribuidora; 
         
     }

@@ -3,6 +3,8 @@
 package lasala;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -10,6 +12,8 @@ import java.io.Serializable;
  */
 public class Libro implements Serializable{
 
+    final String LS=System.getProperty("line.separator");
+    
    private long id; 
    private  String titulo;
    private  String autor;
@@ -17,7 +21,7 @@ public class Libro implements Serializable{
    private  String isbn;
    private double netoCompra;
    private double pvp;
-   //bookStatus
+   private List<BookStatus> histStatus = new ArrayList<BookStatus>();
    private Distribuidora distribuidora;
    
    public Libro(){
@@ -147,7 +151,44 @@ public class Libro implements Serializable{
     public void setDistribuidora(Distribuidora distribuidora) {
         this.distribuidora = distribuidora;
     }
+
+    /**
+     * @return the histStatus
+     */
+    public List<BookStatus> getHistStatus() {
+        return histStatus;
+    }
+
+    /**
+     * @param histStatus the histStatus to set
+     */
+    public void setHistStatus(List<BookStatus> histStatus) {
+        this.histStatus = histStatus;
+    }
    
+   public void setAvailable(){
+       
+       this.histStatus.add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.AVAILABLE)));
+   }
+
+   public void setSold(){
+       this.histStatus.add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.SOLD_OUT)));
+   }
    
+   public void setReturned(){
+       this.histStatus.add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.RETURNED)));
+   }
+
+   public String toString(){
+       StringBuffer sb = new StringBuffer();
+       
+       for (BookStatus b: this.histStatus){
+            
+           sb.append(b.toString());
+           sb.append(LS);
+       }
+       
+       return this.titulo + " " + this.autor + LS + sb.toString();
+   }
 
 }

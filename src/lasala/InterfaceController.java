@@ -103,10 +103,13 @@ public class InterfaceController {
         Libro bookToSave = new Libro(tituloPar, autorPar, editorialPar, isbnPar, netoPar, pvpPar,
                                                      currentDistributorSelected);
           
-                                            
+        bookToSave.setAvailable();
+        
+        System.out.println(bookToSave);
+        
          connectorDAO.saveLibro(bookToSave);
          currentDistributorSelected.addBook(bookToSave);
-         connectorDAO.updateDistributor(currentDistributorSelected);
+         connectorDAO.updateDistributor(currentDistributorSelected); 
         
         JOptionPane.showMessageDialog(null, "datos guardados correctamente");
                       

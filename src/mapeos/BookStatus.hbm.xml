@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="lasala.BookStatus" table="BOOKSTATUS">
+        <id name="id" column="ID_BOOKSTATUS">
+            <generator class="identity" />
+        </id>
+             
+          
+             <one-to-one name="dateIni" cascade="persist, delete"/>        
+             <one-to-one name="dateEnd" cascade="persist, delete"/>
+             <one-to-one name="status" cascade="persist, delete"/>
+    </class> 
+    
+    
+    
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="lasala.Status" table="STATUS">
+        <id name="id" column="ID_BOOKSTATUS">
+            <generator class="identity" />
+        </id>
+             <property name="status"   />
+                     
+             
+             
+    </class> 
+ 
+</hibernate-mapping>
