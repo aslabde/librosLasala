@@ -227,6 +227,9 @@ public class InsertConsole extends javax.swing.JFrame {
     public void initValues(LinkedHashMap<String, Long> distributors){
        List<String> tempNames= new ArrayList(distributors.keySet());
         this.distNames = distributors;
+       
+        this.jComboBox2.removeAllItems();
+        this.jComboBox2.addItem("Distribuidora.....");
         
         for(String s: tempNames){
             this.jComboBox2.addItem(s);
