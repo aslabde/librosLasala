@@ -4,7 +4,9 @@ package lasala;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 /**
  *
  * @author ebalsa@uoc.edu
@@ -13,7 +15,7 @@ public class Distribuidora implements Serializable {
   
     private long id;
     private String name;
-    private List<Libro> books = new ArrayList<Libro>();
+    private Set<Libro> books = new HashSet<Libro>();
             
     public Distribuidora(){
         
@@ -23,15 +25,10 @@ public class Distribuidora implements Serializable {
          this.name=name;
       
      }   
-    
-    
-     public Distribuidora(String name,  ArrayList<Libro> books){
-         this.name=name;
-         this.books=books;
-     }   
+          
      
      public void addBook(Libro book){
-         this.books.add(book);
+         this.getBooks().add(book);
      }
 
     /**
@@ -65,14 +62,14 @@ public class Distribuidora implements Serializable {
     /**
      * @return the books
      */
-    public List<Libro> getBooks() {
+    public Set<Libro> getBooks() {
         return books;
     }
 
     /**
      * @param books the books to set
      */
-    public void setBooks(List<Libro> books) {
+    public void setBooks(Set<Libro> books) {
         this.books = books;
     }
      
