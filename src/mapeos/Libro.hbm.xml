@@ -17,7 +17,7 @@
         
              <many-to-one name="distribuidora" column="ID_DISTRIBUIDORA" />
              
-             <list name="histStatus" cascade="all-delete-orphan" lazy="false" >
+             <list name="histStatus" cascade="all-delete-orphan" >
                  <key column="ID_LIBRO" />
                  <index column="ORDEN" />
                  <one-to-many class="lasala.BookStatus" />
