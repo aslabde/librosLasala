@@ -10,13 +10,10 @@
         </id>
              <property name="name"   />
              
-             <list name="books" cascade="none" lazy="false" >
+             <set name="books"  table="LIBROS"  cascade="save-update" inverse="true"  fetch="join" >
                  <key column="ID_DISTRIBUIDORA" />
-                 <index column="ORDEN" />
                  <one-to-many class="lasala.Libro" />
-                 
-                 
-             </list>
+             </set>
         
     </class> 
     
