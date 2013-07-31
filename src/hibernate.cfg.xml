@@ -12,9 +12,11 @@
     
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="connection.pool_size">1</property>
-        <property name="hibernate.show_sql">true</property>
-        <property name="hbm2ddl.auto"></property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hbm2ddl.auto">create</property>
         
+             
+               
                
         <mapping resource="mapeos/Libro.hbm.xml"/>
         <mapping resource="mapeos/Distribuidora.hbm.xml"/>
