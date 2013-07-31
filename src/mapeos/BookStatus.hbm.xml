@@ -10,9 +10,9 @@
         </id>
              
           
-             <one-to-one name="dateIni" cascade="persist, delete"/>        
-             <one-to-one name="dateEnd" cascade="persist, delete"/>
-             <one-to-one name="status" cascade="persist, delete"/>
+             <one-to-one name="dateIni" cascade="all" lazy="false"/>        
+             <one-to-one name="dateEnd" cascade="all"/>
+             <one-to-one name="status" cascade="all"/>
     </class> 
     
     
