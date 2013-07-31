@@ -82,7 +82,7 @@ public class BookStatus implements Serializable{
     
     public String toString(){
         
-        return this.dateIni.toString() +" -> " + this.status.toString();
+        return this.getDateIni().toString() +" -> " + this.getStatus().toString();
     }
     
 }
