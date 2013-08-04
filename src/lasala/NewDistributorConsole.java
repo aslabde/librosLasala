@@ -42,7 +42,7 @@ public class NewDistributorConsole extends javax.swing.JFrame {
         jLabel2.setText("Alta Nueva Distribuidora");
 
         jButton1.setFont(new java.awt.Font("Verdana", 2, 14)); // NOI18N
-        jButton1.setText("SALIR");
+        jButton1.setText("ATRAS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
