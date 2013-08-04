@@ -32,7 +32,7 @@ public class NewDistributorConsole extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta Nueva Distribuidora");
 
         jLabel1.setFont(new java.awt.Font("Verdana", 2, 14)); // NOI18N
