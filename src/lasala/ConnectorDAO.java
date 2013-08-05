@@ -120,7 +120,35 @@ public class ConnectorDAO {
         { 
             beginOperation(); 
             Criteria cr =sesion.createCriteria(Libro.class);
-            cr.add(Restrictions.ilike("titulo","%"+searchQuery+"%" ));
+            cr.add(Restrictions.or(Restrictions.ilike("titulo","%"+searchQuery+"%" ),
+                                         Restrictions.ilike("autor","%"+searchQuery+"%" )));
+            
+            listLibros=cr.list();
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he;             
+        } finally 
+        { 
+             sesion.close(); 
+        }  
+
+        return listLibros; 
+    }  
+     
+     public List<Libro> getListAvailableLibros(String searchQuery) throws HibernateException 
+    { 
+        List<Libro>listLibros = null;  
+        
+        
+        try 
+        { 
+            beginOperation(); 
+            Criteria cr =sesion.createCriteria(Libro.class);
+            cr.add(Restrictions.or(Restrictions.ilike("titulo","%"+searchQuery+"%" ),
+                                         Restrictions.ilike("autor","%"+searchQuery+"%" )));
+            cr.add(Restrictions.eq("status", EnumeratedStatus.AVAILABLE));
+            
             listLibros=cr.list();
         } catch (HibernateException he) 
         { 

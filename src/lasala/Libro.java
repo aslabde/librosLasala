@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Libro implements Serializable{
 
-    final String LS=System.getProperty("line.separator");
+    private String LS=System.getProperty("line.separator");
     
    private long id; 
    private  String titulo;
@@ -23,6 +23,7 @@ public class Libro implements Serializable{
    private double pvp;
    private List<BookStatus> histStatus = new ArrayList<BookStatus>();
    private Distribuidora distribuidora;
+   private EnumeratedStatus Status;
    
    public Libro(){
       
@@ -38,6 +39,7 @@ public class Libro implements Serializable{
        this.netoCompra=netoCompra;       
        this.pvp=pvp;
        this.distribuidora=distribuidora;
+       this.Status=EnumeratedStatus.AVAILABLE;
    }
 
     /**
@@ -159,36 +161,73 @@ public class Libro implements Serializable{
         return histStatus;
     }
 
+ 
+   public void setAvailable(){
+       
+        this.getHistStatus().add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.AVAILABLE)));
+        this.setStatus(EnumeratedStatus.AVAILABLE);
+   }
+
+   public void setSold(){
+        this.getHistStatus().add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.SOLD_OUT)));
+        this.setStatus(EnumeratedStatus.SOLD_OUT);
+   }
+   
+   public void setReturned(){
+        this.getHistStatus().add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.RETURNED)));
+        this.setStatus(EnumeratedStatus.RETURNED);
+   }
+
+   public String toString(){
+       StringBuffer sb = new StringBuffer();
+       
+       for (BookStatus b: this.getHistStatus()){
+            
+           sb.append(b.toString());
+           sb.append(getLS());
+       }
+       
+       return this.getTitulo() + " " + this.getAutor() + getLS() + sb.toString();
+   }
+
+    /**
+     * @return the LS
+     */
+    public String getLS() {
+        return LS;
+    }
+
+    /**
+     * @param LS the LS to set
+     */
+    public void setLS(String LS) {
+        this.LS = LS;
+    }
+
+    /**
+     * @param histStatus the histStatus to set
+     */
+   
+
+    /**
+     * @return the Status
+     */
+    public EnumeratedStatus getStatus() {
+        return Status;
+    }
+
+    /**
+     * @param Status the Status to set
+     */
+    public void setStatus(EnumeratedStatus Status) {
+        this.Status = Status;
+    }
+
     /**
      * @param histStatus the histStatus to set
      */
     public void setHistStatus(List<BookStatus> histStatus) {
         this.histStatus = histStatus;
     }
-   
-   public void setAvailable(){
-       
-       this.histStatus.add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.AVAILABLE)));
-   }
-
-   public void setSold(){
-       this.histStatus.add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.SOLD_OUT)));
-   }
-   
-   public void setReturned(){
-       this.histStatus.add(new BookStatus(new Fecha(), new Status(EnumeratedStatus.RETURNED)));
-   }
-
-   public String toString(){
-       StringBuffer sb = new StringBuffer();
-       
-       for (BookStatus b: this.histStatus){
-            
-           sb.append(b.toString());
-           sb.append(LS);
-       }
-       
-       return this.titulo + " " + this.autor + LS + sb.toString();
-   }
 
 }

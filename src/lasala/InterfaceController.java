@@ -138,6 +138,28 @@ public class InterfaceController {
        
    }
    
+   public static ArrayList getAvailableListBooks(String sQuery){
+     List<Libro> results= new ArrayList<>();
+     ArrayList parsedResults =new ArrayList<>();
+     
+     results=connectorDAO.getListAvailableLibros(sQuery);
+      
+     if(!results.isEmpty()){
+            for(Libro l: results){
+                parsedResults.add(l.getTitulo());
+                parsedResults.add(l.getAutor());
+                parsedResults.add(l.getEditorial());
+                parsedResults.add(l.getIsbn());
+                parsedResults.add(String.valueOf(l.getNetoCompra()));
+                parsedResults.add(String.valueOf(l.getPvp()));
+                parsedResults.add(String.valueOf(l.getId()));
+
+            }
+     }                
+           return parsedResults;
+       
+   }
+   
    public void changeBookStatus(Long id, EnumeratedStatus newStatus){
        
        Libro bookToUpdate=connectorDAO.getLibro(id);

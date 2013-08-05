@@ -14,6 +14,12 @@
              <property name="isbn"  />
              <property name="netoCompra"  />
              <property name="pvp"  />
+             <property name="status">
+	  <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">lasala.EnumeratedStatus</param>
+                    <param name="type">12</param>
+                 </type>
+             </property>
         
              <many-to-one name="distribuidora" column="ID_DISTRIBUIDORA" />
              
