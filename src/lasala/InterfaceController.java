@@ -67,6 +67,7 @@ public class InterfaceController {
        parsedBook.add(String.valueOf(returnedBook.getNetoCompra()));
        parsedBook.add(String.valueOf(returnedBook.getPvp()));
        parsedBook.add(String.valueOf(returnedBook.getId()));
+       parsedBook.add(returnedBook.getStatus().toString());
         
        bookDetail.setFields(parsedBook);
        bookDetail.setLocationRelativeTo(null);  
