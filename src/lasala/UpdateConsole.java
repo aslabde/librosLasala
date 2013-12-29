@@ -14,17 +14,15 @@ import org.hibernate.HibernateException;
  *
  * @author ebalsa@uoc.edu
  */
-public class InterfaceController {
+public class UpdateConsole {
  
     static ConnectorDAO connectorDAO =new ConnectorDAO();
     static InsertConsole insConsole = new  InsertConsole();
-    static BrowserConsole browserConsole = new  BrowserConsole();
+    static SalesConsole browserConsole = new  SalesConsole();
     static BookDetail bookDetail= new BookDetail();
-    static BookSaleDetail bookSaleDetail= new BookSaleDetail();
     static NewDistributorConsole newDistributorConsole = new NewDistributorConsole();
-    static SalesConsole salesConsole = new SalesConsole();
     
-    public InterfaceController(){
+    public UpdateConsole(){
          MainConsole mc = new MainConsole(); 
                
         mc.setLocationRelativeTo(null);       
@@ -48,12 +46,6 @@ public class InterfaceController {
      browserConsole.clearUI();
     browserConsole.setLocationRelativeTo(null);  
     browserConsole.setVisible(true);
-    }
-   
-   public static  void buildSalesConsole(){
-     salesConsole.clearUI();
-    salesConsole.setLocationRelativeTo(null);  
-    salesConsole.setVisible(true);
     }
    
    public static  void buildNewDistributorConsole(){
@@ -80,42 +72,6 @@ public class InterfaceController {
        bookDetail.setFields(parsedBook);
        bookDetail.setLocationRelativeTo(null);  
        bookDetail.setVisible(true);
-   }
-   
-     public static void buildBookChangeDetail(long id, BookDetail bd){
-       ArrayList<String> parsedBook = new ArrayList<String>();
-       
-       Libro returnedBook= connectorDAO.getLibro(id);
-     
-       parsedBook.add(returnedBook.getTitulo());
-       parsedBook.add(returnedBook.getAutor());
-       parsedBook.add(returnedBook.getEditorial());
-       parsedBook.add(returnedBook.getIsbn());
-       parsedBook.add(String.valueOf(returnedBook.getNetoCompra()));
-       parsedBook.add(String.valueOf(returnedBook.getPvp()));
-       parsedBook.add(String.valueOf(returnedBook.getId()));
-       parsedBook.add(returnedBook.getStatus().toString());
-        
-       bookChaangeDetail.setFields(parsedBook);
-       bookChangeDetail.setLocationRelativeTo(null);  
-       bookChangeDetail.setVisible(true);
-   }
-   
-   public static void buildBookSaleDetail(long id){
-       ArrayList<String> parsedBook = new ArrayList<String>();
-       
-       Libro returnedBook= connectorDAO.getLibro(id);
-     
-       parsedBook.add(returnedBook.getTitulo());
-       parsedBook.add(returnedBook.getAutor());
-       parsedBook.add(returnedBook.getEditorial());
-       parsedBook.add(returnedBook.getIsbn());
-       parsedBook.add(String.valueOf(returnedBook.getPvp()));
-       parsedBook.add(String.valueOf(returnedBook.getId()));
-             
-       bookSaleDetail.setFields(parsedBook);
-       bookSaleDetail.setLocationRelativeTo(null);  
-       bookSaleDetail.setVisible(true);
    }
     
    public static void saveBook(ArrayList<String> userInput) throws HibernateException{
@@ -205,27 +161,7 @@ public class InterfaceController {
        
    }
    
-   public static ArrayList getSaleListBooks(String sQuery){
-     List<Libro> results= new ArrayList<>();
-     ArrayList parsedResults =new ArrayList<>();
-     
-     results=connectorDAO.getListAvailableLibros(sQuery);
-      
-     if(!results.isEmpty()){
-            for(Libro l: results){
-                parsedResults.add(l.getTitulo());
-                parsedResults.add(l.getAutor());
-                parsedResults.add(l.getEditorial());
-                parsedResults.add(String.valueOf(l.getPvp()));
-                parsedResults.add(String.valueOf(l.getId()));
-
-            }
-     }                
-           return parsedResults;
-       
-   }
-   
-   public static void changeBookStatus(Long id, EnumeratedStatus newStatus){
+   public void changeBookStatus(Long id, EnumeratedStatus newStatus){
        
        Libro bookToUpdate=connectorDAO.getLibro(id);
        switch(newStatus){
@@ -236,7 +172,6 @@ public class InterfaceController {
                                                          break;
           
            case SOLD_OUT: bookToUpdate.setSold();
-                                    JOptionPane.showMessageDialog(null, "libro vendido!!");
                                                          break;
            } 
        

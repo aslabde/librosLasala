@@ -19,7 +19,7 @@ import org.hibernate.HibernateException;
 public class InsertConsole extends javax.swing.JFrame {
 
     public InsertConsole() {
-        initComponents();
+        this.initComponents();
          }
 
     /**
