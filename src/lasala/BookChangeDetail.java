@@ -4,7 +4,10 @@
  */
 package lasala;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -110,8 +113,18 @@ public class BookChangeDetail extends javax.swing.JFrame {
         jTextField4.setText("jTextField4");
 
         jTextField5.setText("jTextField5");
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
+            }
+        });
 
         jTextField6.setText("jTextField6");
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField6KeyTyped(evt);
+            }
+        });
 
         jRadioButton1.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
         jRadioButton1.setSelected(true);
@@ -228,7 +241,51 @@ public class BookChangeDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    
+         ArrayList<String> InputResults = new ArrayList<String>();
+        
+        InputResults.add(jTextField1.getText());
+        InputResults.add(jTextField2.getText());
+        InputResults.add(jTextField3.getText());
+        InputResults.add(jTextField4.getText());
+        InputResults.add(jTextField5.getText());
+        InputResults.add(jTextField6.getText());
+        InputResults.add(String.valueOf(bookId));
+        
+        if (this.jRadioButton1.isEnabled()){
+            InputResults.add("AVAILABLE");
+            
+        }
+        else{
+               if(this.jRadioButton2.isEnabled()){
+                   InputResults.add("RETURNED"); 
+               }
+               else{
+                    InputResults.add("SOLD_OUT");
+               }
+        }
+        
+        
+      try{  
+           if (InputResults.get(0).equals("") ){
+               JOptionPane.showMessageDialog(null, "Por favor, introduce un titulo");   
+           }
+          else if (InputResults.get(4).equals("") ){
+               JOptionPane.showMessageDialog(null, "Por favor, introduce un precio de compra");   
+           }
+          else   if (InputResults.get(5).equals("") ){
+               JOptionPane.showMessageDialog(null, "Por favor, introduce un precio de venta");   
+           }
+           
+           else{
+            InterfaceController.updateBookDetails(InputResults);
+             JOptionPane.showMessageDialog(null, "libro actualizado");    
+             this.bd.setFields(InputResults);
+             this.dispose(); 
+           }
+      }
+      catch(HibernateException he){
+          
+      }    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -238,6 +295,22 @@ public class BookChangeDetail extends javax.swing.JFrame {
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        char c=evt.getKeyChar();
+      
+      if (!this.isNumerical(c)){
+          evt.consume();
+      }
+    }//GEN-LAST:event_jTextField5KeyTyped
+
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+         char c=evt.getKeyChar();
+      
+      if (!this.isNumerical(c)){
+          evt.consume();
+      }
+    }//GEN-LAST:event_jTextField6KeyTyped
 
     /**
      * @param args the command line arguments
@@ -318,7 +391,7 @@ public class BookChangeDetail extends javax.swing.JFrame {
         this.buttonGroup1.add(this.jRadioButton2);
         this.buttonGroup1.add(this.jRadioButton3);
         String s =(bookParsedResults.get(6));
-        System.out.println(s);
+        
         switch(s){
             case "AVAILABLE":  this.jRadioButton1.setSelected(true);
                                    break;
@@ -329,5 +402,12 @@ public class BookChangeDetail extends javax.swing.JFrame {
                 
         }
     }
-
+                       
+        
+    public boolean isNumerical(char c){
+    
+  return(Character.isDigit(c)  ||  c==KeyEvent.VK_DELETE  ||  c==KeyEvent.VK_BACK_SPACE 
+            ||c==KeyEvent.VK_COMMA || c==KeyEvent.VK_TAB || c==KeyEvent.VK_PERIOD );
+        
+    }
 }

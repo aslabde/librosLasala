@@ -219,7 +219,7 @@ public class Libro implements Serializable{
     /**
      * @param Status the Status to set
      */
-    public void setStatus(EnumeratedStatus Status) {
+    private void setStatus(EnumeratedStatus Status) {
         this.Status = Status;
     }
 

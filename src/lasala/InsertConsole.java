@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 
 public class InsertConsole extends javax.swing.JFrame {
@@ -210,23 +211,34 @@ public class InsertConsole extends javax.swing.JFrame {
         InputResults.add(jTextField3.getText());
         InputResults.add(jTextField4.getText());
         InputResults.add(jTextField5.getText());
-        InputResults.add(jTextField6.getText());
-        InputResults.add(this.distNames.get(jComboBox2.getSelectedItem()).toString());
+        InputResults.add(jTextField6.getText());  
         
-        
-        
-        
-      try{  
-     InterfaceController.saveBook(InputResults);
-     this.clearFields();
-     
-      }
-      catch(HibernateException he){
-          
-      }
-     
-     
-     
+        if(this.jComboBox2.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Por favor, selecciona una distribuidora del desplegable"); 
+        }
+        else{
+            try{  
+                 InputResults.add(this.distNames.get(jComboBox2.getSelectedItem()).toString());
+                
+                if (InputResults.get(0).equals("") ){
+                     JOptionPane.showMessageDialog(null, "Por favor, introduce un titulo");   
+                 }
+                else if (InputResults.get(4).equals("") ){
+                     JOptionPane.showMessageDialog(null, "Por favor, introduce un precio de compra");   
+                 }
+                else   if (InputResults.get(5).equals("") ){
+                     JOptionPane.showMessageDialog(null, "Por favor, introduce un precio de venta");   
+                 }
+
+                else{
+                  InterfaceController.saveBook(InputResults);
+                  this.clearFields();
+                }  
+            }
+            catch(HibernateException he){
+
+            }
+        }
     }//GEN-LAST:event_botonGuardarLibroActionPerformed
    
     public void clearFields(){

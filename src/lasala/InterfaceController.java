@@ -151,7 +151,7 @@ public class InterfaceController {
           
         bookToSave.setAvailable();
         
-        System.out.println(bookToSave);
+       //System.out.println(bookToSave);
         
          connectorDAO.saveLibro(bookToSave);
          currentDistributorSelected.addBook(bookToSave);
@@ -160,6 +160,41 @@ public class InterfaceController {
         JOptionPane.showMessageDialog(null, "datos guardados correctamente");
                       
      
+   }
+  
+   
+   public static void updateBookDetails ( ArrayList<String> InputResults ) throws HibernateException {
+       String tituloPar = InputResults.get(0);
+       String autorPar = InputResults.get(1);
+       String editorialPar = InputResults.get(2);
+       String isbnPar = InputResults.get(3);
+       Double netoPar = Double.parseDouble(InputResults.get(4));
+       Double pvpPar = Double.parseDouble(InputResults.get(5));
+       long bookId = Long.parseLong(InputResults.get(6));
+       
+       Libro bookToUpdate=connectorDAO.getLibro(bookId); 
+       
+       bookToUpdate.setTitulo(tituloPar);
+       bookToUpdate.setAutor(autorPar);
+       bookToUpdate.setEditorial(editorialPar);
+       bookToUpdate.setIsbn(isbnPar);
+       bookToUpdate.setNetoCompra(netoPar); 
+       bookToUpdate.setPvp(pvpPar);
+       
+       String s = InputResults.get(7);
+       
+       switch(s){
+            case "AVAILABLE":  bookToUpdate.setAvailable();
+                                   break;
+            case "RETURNED":   bookToUpdate.setReturned();
+                                   break;
+            case "SOLD_OUT":   bookToUpdate.setSold();
+                                   break;    
+                
+        }
+      
+       
+        connectorDAO.updateLibro(bookToUpdate);      
    }
    
    public static ArrayList getListBooks(String sQuery){
