@@ -264,7 +264,19 @@ public class BookDetail extends javax.swing.JFrame {
         this.jLabel4.setText(bookParsedResults.get(3));
         this.jLabel5.setText(bookParsedResults.get(4));
         this.jLabel6.setText(bookParsedResults.get(5));
-        this.jLabel14.setText(bookParsedResults.get(7));
+       
+        String s= bookParsedResults.get(7);
+        
+        switch(s){
+            case "AVAILABLE":   this.jLabel14.setText("DISPONIBLE");
+                                   break;
+            case "RETURNED":  this.jLabel14.setText("DEVUELTO");
+                                   break;
+            case "SOLD_OUT":  this.jLabel14.setText("VENDIDO");
+                                   break;    
+                
+        }
+       
     }
 
 }

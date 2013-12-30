@@ -35,6 +35,7 @@ public class BookChangeDetail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -50,6 +51,9 @@ public class BookChangeDetail extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Detalle de libro");
@@ -109,6 +113,23 @@ public class BookChangeDetail extends javax.swing.JFrame {
 
         jTextField6.setText("jTextField6");
 
+        jRadioButton1.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("DISPONIBLE");
+        jRadioButton1.setToolTipText("");
+
+        jRadioButton2.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
+        jRadioButton2.setText("DEVUELTO");
+        jRadioButton2.setToolTipText("");
+
+        jRadioButton3.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
+        jRadioButton3.setText("VENDIDO");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,6 +162,14 @@ public class BookChangeDetail extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(jRadioButton1)
+                .addGap(61, 61, 61)
+                .addComponent(jRadioButton2)
+                .addGap(77, 77, 77)
+                .addComponent(jRadioButton3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,14 +201,19 @@ public class BookChangeDetail extends javax.swing.JFrame {
                                 .addGap(33, 33, 33)
                                 .addComponent(jLabel11))
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(jLabel12))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel13)
-                .addGap(104, 104, 104)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton3))
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,6 +234,10 @@ public class BookChangeDetail extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +274,7 @@ public class BookChangeDetail extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
@@ -245,6 +284,9 @@ public class BookChangeDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -271,7 +313,21 @@ public class BookChangeDetail extends javax.swing.JFrame {
         this.jTextField4.setText(bookParsedResults.get(3));
         this.jTextField5.setText(bookParsedResults.get(4));
         this.jTextField6.setText(bookParsedResults.get(5));
-        //INCLUIR RADIO BUTTONS(bookParsedResults.get(6));
+        
+        this.buttonGroup1.add(this.jRadioButton1);
+        this.buttonGroup1.add(this.jRadioButton2);
+        this.buttonGroup1.add(this.jRadioButton3);
+        String s =(bookParsedResults.get(6));
+        System.out.println(s);
+        switch(s){
+            case "AVAILABLE":  this.jRadioButton1.setSelected(true);
+                                   break;
+            case "RETURNED":  this.jRadioButton2.setSelected(true);
+                                   break;
+            case "SOLD_OUT":  this.jRadioButton3.setSelected(true);
+                                   break;    
+                
+        }
     }
 
 }
