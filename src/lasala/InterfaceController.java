@@ -20,6 +20,7 @@ public class InterfaceController {
     static InsertConsole insConsole = new  InsertConsole();
     static BrowserConsole browserConsole = new  BrowserConsole();
     static BookDetail bookDetail= new BookDetail();
+    static BookChangeDetail bookChangeDetail= new BookChangeDetail();
     static BookSaleDetail bookSaleDetail= new BookSaleDetail();
     static NewDistributorConsole newDistributorConsole = new NewDistributorConsole();
     static SalesConsole salesConsole = new SalesConsole();
@@ -93,10 +94,10 @@ public class InterfaceController {
        parsedBook.add(returnedBook.getIsbn());
        parsedBook.add(String.valueOf(returnedBook.getNetoCompra()));
        parsedBook.add(String.valueOf(returnedBook.getPvp()));
-       parsedBook.add(String.valueOf(returnedBook.getId()));
        parsedBook.add(returnedBook.getStatus().toString());
-        
-       bookChaangeDetail.setFields(parsedBook);
+       
+       bookChangeDetail = new BookChangeDetail(id, bd);
+       bookChangeDetail.setFields(parsedBook);
        bookChangeDetail.setLocationRelativeTo(null);  
        bookChangeDetail.setVisible(true);
    }
