@@ -144,7 +144,7 @@ public class Libro implements Serializable{
      * @return the distribuidora
      */
     public Distribuidora getDistribuidora() {
-        return distribuidora;
+        return this.distribuidora;
     }
 
     /**

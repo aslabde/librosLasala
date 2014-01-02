@@ -10,7 +10,7 @@
         </id>
              <property name="name"   />
              
-             <set name="books"  table="LIBROS"  cascade="save-update" inverse="true"  fetch="join" >
+             <set name="books"  table="LIBROS"  cascade="save-update" inverse="true"  fetch="join">
                  <key column="ID_DISTRIBUIDORA" />
                  <one-to-many class="lasala.Libro" />
              </set>

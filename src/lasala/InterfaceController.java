@@ -24,6 +24,7 @@ public class InterfaceController {
     static BookSaleDetail bookSaleDetail= new BookSaleDetail();
     static NewDistributorConsole newDistributorConsole = new NewDistributorConsole();
     static SalesConsole salesConsole = new SalesConsole();
+    static ReturnConsole returnConsole = new ReturnConsole();
     
     public InterfaceController(){
          MainConsole mc = new MainConsole(); 
@@ -38,8 +39,7 @@ public class InterfaceController {
    public static  void buildInsertConsole(){
      LinkedHashMap distNames = connectorDAO.getDistributorMap();
      
-     
-    insConsole.initValues(distNames);
+     insConsole.initValues(distNames);
     insConsole.clearFields();
     insConsole.setLocationRelativeTo(null);  
     insConsole.setVisible(true);
@@ -61,6 +61,14 @@ public class InterfaceController {
     newDistributorConsole.clearUI(); 
     newDistributorConsole.setLocationRelativeTo(null);  
     newDistributorConsole.setVisible(true);
+    }
+   
+   public static  void buildReturnConsole(){
+     LinkedHashMap distNames = connectorDAO.getDistributorMap();
+     
+    returnConsole.initValues(distNames);
+    returnConsole.setLocationRelativeTo(null);  
+    returnConsole.setVisible(true);
     }
    
    
@@ -241,6 +249,30 @@ public class InterfaceController {
        
    }
    
+      
+   public static ArrayList getBooksByDistributor(String sQuery){
+     List<Libro> results= new ArrayList<>();
+     ArrayList parsedResults =new ArrayList<>();
+     
+          
+     results=connectorDAO.getBooksByDistributor(sQuery);
+  
+         
+     if(results !=null){
+            for(Libro l: results){
+                parsedResults.add(l.getTitulo());
+                parsedResults.add(l.getAutor());
+                parsedResults.add(l.getEditorial());
+                parsedResults.add(l.getIsbn());
+                parsedResults.add(String.valueOf(l.getNetoCompra()));
+                parsedResults.add(String.valueOf(l.getPvp()));
+                parsedResults.add(String.valueOf(l.getId()));
+               
+            }
+     }                
+           return parsedResults;
+       
+   }
    public static ArrayList getSaleListBooks(String sQuery){
      List<Libro> results= new ArrayList<>();
      ArrayList parsedResults =new ArrayList<>();

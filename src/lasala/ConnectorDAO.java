@@ -162,6 +162,37 @@ public class ConnectorDAO {
         return listLibros; 
     }  
      
+       public List<Libro> getBooksByDistributor(String searchQuery) throws HibernateException 
+    { 
+        List<Libro>listLibros = null;  
+       Long dist = this.getDistributorByname(searchQuery);
+       
+       if (dist == null){
+          
+           return listLibros;
+       }
+        
+        try 
+        { 
+            beginOperation(); 
+            Criteria cr =sesion.createCriteria(Libro.class);
+             
+            cr.add(Restrictions.eq("distribuidora.id",Long.parseLong("1")));
+            cr.add(Restrictions.eq("status", EnumeratedStatus.AVAILABLE));
+                      
+           listLibros=cr.list();
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he;             
+        } finally 
+        { 
+             sesion.close(); 
+        }  
+
+        return listLibros; 
+    }  
+     
     public  long saveDistributor(Distribuidora distribuidora) throws HibernateException { 
    
         long id = 0;  
@@ -182,6 +213,8 @@ public class ConnectorDAO {
 
         return id; 
     }  
+    
+    
      
      
     public LinkedHashMap getDistributorMap () throws HibernateException {
@@ -251,7 +284,30 @@ public class ConnectorDAO {
      
     }
     
-      
+    private Long getDistributorByname (String sQuery){
+         List<Distribuidora> returnedDistributorsList = null;      
+        try 
+        { 
+            beginOperation(); 
+            Criteria cr =sesion.createCriteria(Distribuidora.class);
+             cr.add(Restrictions.eq("name", sQuery));
+                    
+                       
+          returnedDistributorsList =cr.list();
+       
+        } catch (HibernateException he) 
+        { 
+            handleException(he); 
+            throw he;             
+        } finally 
+        { 
+             sesion.close(); 
+        }  
+        if (returnedDistributorsList.isEmpty()) return null;
+        return returnedDistributorsList.get(1).getId(); 
+        
+    }
+    
     private void beginOperation() throws HibernateException 
     { 
         sesion = HibernateUtil.getSessionFactory().openSession();
@@ -265,5 +321,5 @@ public class ConnectorDAO {
         throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
     } 
 
-
+    
 }

@@ -35,7 +35,7 @@ public class Distribuidora implements Serializable {
      * @return the id
      */
     public long getId() {
-        return id;
+        return this.id;
     }
 
     /**

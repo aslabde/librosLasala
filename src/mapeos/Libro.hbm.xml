@@ -21,7 +21,7 @@
                  </type>
              </property>
         
-             <many-to-one name="distribuidora" column="ID_DISTRIBUIDORA" />
+             <many-to-one name="distribuidora" column="ID_DISTRIBUIDORA" lazy="false" />
              
              <list name="histStatus" cascade="all-delete-orphan" lazy="false" >
                  <key column="ID_LIBRO" />
