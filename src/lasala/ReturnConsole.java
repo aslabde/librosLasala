@@ -4,8 +4,11 @@
  */
 package lasala;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,10 @@ import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedHashMap;
+import javax.swing.AbstractButton;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -44,6 +51,7 @@ public class ReturnConsole extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
 
@@ -57,15 +65,22 @@ public class ReturnConsole extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.setText("jCheckBox1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBox1)
+                .addGap(184, 184, 184))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 319, Short.MAX_VALUE)
+                .addComponent(jCheckBox1))
         );
 
         jButton2.setText("ATRAS");
@@ -76,9 +91,34 @@ public class ReturnConsole extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
+        jComboBox1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jComboBox1ComponentShown(evt);
+            }
+        });
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
+            }
+        });
+        jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboBox1FocusGained(evt);
+            }
+        });
+        jComboBox1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox1PropertyChange(evt);
             }
         });
 
@@ -135,6 +175,7 @@ public class ReturnConsole extends javax.swing.JFrame {
        names.add("Neto Compra");
        names.add("P.V.P.");
        names.add("Id");
+       names.add("Devolver");
                  
     String selectedDistributor = this.jComboBox1.getSelectedItem().toString();
      results = InterfaceController.getBooksByDistributor(selectedDistributor);  
@@ -143,23 +184,17 @@ public class ReturnConsole extends javax.swing.JFrame {
      final JTable table = new JTable(tmod);
      JScrollPane js = new JScrollPane(table);
        
+  //EDITAR CELL EDITOR PARA LA 7 COLMNA
+     
+   
+
+     
     jPanel1.updateUI();
     jPanel1.add(js);             
     jPanel1.setLayout(new GridLayout());     
     this.pack();
    
-    
-    table.addMouseListener(new MouseAdapter() {
-   public void mouseClicked(MouseEvent e) {
-      if (e.getClickCount() == 2) {
-         JTable target = (JTable)e.getSource();
-         int row = target.getSelectedRow();
-         int column =table.getColumnCount() - 1;
-         InterfaceController.buildBookDetail(Long.parseLong(table.getValueAt(row, column).toString()));      
-         }
-   }
-});
-        
+            
              
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -168,7 +203,23 @@ public class ReturnConsole extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-  /*       this.clearUI(); 
+     
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jComboBox1ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ComponentShown
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1FocusGained
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+ this.clearUI(); 
        
        ArrayList results = new ArrayList();
        ArrayList names = new ArrayList();
@@ -180,20 +231,27 @@ public class ReturnConsole extends javax.swing.JFrame {
        names.add("Neto Compra");
        names.add("P.V.P.");
        names.add("Id");
-           
-     String selectedDistributor = this.jComboBox1.getSelectedItem().toString();
-     results = InterfaceController.getBooksByDistributor("selectedDistributor");  
+       names.add("Devolver");
+                 
+    String selectedDistributor = this.jComboBox1.getSelectedItem().toString();
+     results = InterfaceController.getBooksByDistributor(selectedDistributor);  
        
      MyTableModel tmod = new MyTableModel(results, names);
      final JTable table = new JTable(tmod);
      JScrollPane js = new JScrollPane(table);
-       
+    
     jPanel1.updateUI();
     jPanel1.add(js);             
     jPanel1.setLayout(new GridLayout());     
-    this.pack();*/
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    this.pack();     
+    
+         
+    }//GEN-LAST:event_jComboBox1MouseClicked
 
+    private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1PropertyChange
+    
     /**
      * @param args the command line arguments
      */
@@ -232,6 +290,7 @@ public class ReturnConsole extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

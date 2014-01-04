@@ -281,6 +281,7 @@ public class BookChangeDetail extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "libro actualizado");    
              this.bd.setFields(InputResults);
              this.dispose(); 
+             InterfaceController.browserConsole.dispose();
            }
       }
       catch(HibernateException he){

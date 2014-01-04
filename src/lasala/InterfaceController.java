@@ -2,11 +2,17 @@
 
 package lasala;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 
@@ -256,8 +262,7 @@ public class InterfaceController {
      
           
      results=connectorDAO.getBooksByDistributor(sQuery);
-  
-         
+     
      if(results !=null){
             for(Libro l: results){
                 parsedResults.add(l.getTitulo());
@@ -267,6 +272,7 @@ public class InterfaceController {
                 parsedResults.add(String.valueOf(l.getNetoCompra()));
                 parsedResults.add(String.valueOf(l.getPvp()));
                 parsedResults.add(String.valueOf(l.getId()));
+                parsedResults.add(new Boolean(false));
                
             }
      }                
@@ -311,6 +317,43 @@ public class InterfaceController {
           connectorDAO.updateLibro(bookToUpdate);
    }
    
+   public static void newBackUp() throws IOException{
+       String partial_path = new String("C:\\Users\\Usuario\\Dropbox\\PruebaDB\\");
+       StringBuilder sb = new StringBuilder();
+       DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+       Date date = new Date();
+       
+       sb.append(partial_path).append(dateFormat.format(date));
+       
+       String path =sb.toString();
+       
+       
+        try{    
+       String user = "lasala";
+       String password ="Cris_samU";
+       String dbase = "lasala";
+       Process p;
+       ProcessBuilder pb;
+       
+   //pb = new ProcessBuilder( "cmd.exe",  "/c","start" ); 
+       pb = new ProcessBuilder( "cmd.exe",  "/c", "pg_dump.exe","-v", "-f", path, "-U", user, dbase); 
+       pb.environment().put("PGPASSWORD", password);
+       pb.redirectError();
+       pb.directory(new File("C:/PostgreSQL/9.2/bin"));
+       p = pb.start();
+       
+       JOptionPane.showMessageDialog(null, "datos guardados correctamente");
+       
+        }catch(IOException e){
+             JOptionPane.showMessageDialog(null, "Error al guardar los datos");
+       
+             throw new IOException("Ocurrió un error en la copia de seguridad", e); 
+         }
+          finally 
+        { 
+        
+        }              
+   }
    
     public static void saveDistributor(String distName){
      

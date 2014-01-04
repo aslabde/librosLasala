@@ -1,5 +1,7 @@
 package lasala;
 
+import java.io.IOException;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -79,6 +81,11 @@ public class MainConsole extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton5.setText("COPIA SEGURIDAD");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton6.setText("ALTA LIBROS");
@@ -190,6 +197,15 @@ public class MainConsole extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
          InterfaceController.buildSalesConsole();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       try{
+           InterfaceController.newBackUp();
+       }
+       catch(IOException e){
+           this.doLayout();
+       }// TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

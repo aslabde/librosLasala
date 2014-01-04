@@ -32,11 +32,20 @@ public class MyTableModel  extends AbstractTableModel{
     
     public Object getValueAt(int rowIndex, int columnIndex) {  //Data / Rows + Columns
         
-        return (String)this.searchResults.get(rowIndex * this.names.size() + columnIndex );
+        return this.searchResults.get(rowIndex * this.names.size() + columnIndex );
     }
 
      public boolean isCellEditable(int row, int col){ //No writable cells
+        if (col == 7) return true;
+         
          return false;
       }
+     
+     public Class<?> getColumnClass(int columnIndex){
+         
+         return searchResults.get(columnIndex).getClass();
+         
+         
+     }
     
 }
