@@ -335,8 +335,7 @@ public class InterfaceController {
        Process p;
        ProcessBuilder pb;
        
-   //pb = new ProcessBuilder( "cmd.exe",  "/c","start" ); 
-       pb = new ProcessBuilder( "cmd.exe",  "/c", "pg_dump.exe","-v", "-f", path, "-U", user, dbase); 
+       pb = new ProcessBuilder( "cmd.exe",  "/c", "pg_dump.exe","-v","-n","public", "-f", path, "-U", user, dbase); 
        pb.environment().put("PGPASSWORD", password);
        pb.redirectError();
        pb.directory(new File("C:/PostgreSQL/9.2/bin"));
