@@ -4,24 +4,25 @@
  */
 package lasala;
 
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedHashMap;
+import java.util.List;
+import javax.persistence.Column;
 import javax.swing.AbstractButton;
+import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 /**
@@ -51,9 +52,9 @@ public class ReturnConsole extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,22 +66,15 @@ public class ReturnConsole extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("jCheckBox1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
-                .addGap(184, 184, 184))
+            .addGap(0, 711, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 319, Short.MAX_VALUE)
-                .addComponent(jCheckBox1))
+            .addGap(0, 344, Short.MAX_VALUE)
         );
 
         jButton2.setText("ATRAS");
@@ -122,6 +116,13 @@ public class ReturnConsole extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("DEVOLVER SELECCIONADOS");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,30 +132,31 @@ public class ReturnConsole extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 508, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(251, 251, 251)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11))
         );
 
@@ -182,13 +184,12 @@ public class ReturnConsole extends javax.swing.JFrame {
        
      MyTableModel tmod = new MyTableModel(results, names);
      final JTable table = new JTable(tmod);
+     this.jtable = table;
      JScrollPane js = new JScrollPane(table);
        
   //EDITAR CELL EDITOR PARA LA 7 COLMNA
-     
-   
-
-     
+  table.getColumnModel().getColumn(7).setCellEditor(  new CheckBoxCellEditor());
+  
     jPanel1.updateUI();
     jPanel1.add(js);             
     jPanel1.setLayout(new GridLayout());     
@@ -219,38 +220,16 @@ public class ReturnConsole extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1FocusGained
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
- this.clearUI(); 
-       
-       ArrayList results = new ArrayList();
-       ArrayList names = new ArrayList();
-       
-       names.add("Título");
-       names.add("Autor");
-       names.add("Editorial");
-       names.add("ISBN");
-       names.add("Neto Compra");
-       names.add("P.V.P.");
-       names.add("Id");
-       names.add("Devolver");
-                 
-    String selectedDistributor = this.jComboBox1.getSelectedItem().toString();
-     results = InterfaceController.getBooksByDistributor(selectedDistributor);  
-       
-     MyTableModel tmod = new MyTableModel(results, names);
-     final JTable table = new JTable(tmod);
-     JScrollPane js = new JScrollPane(table);
-    
-    jPanel1.updateUI();
-    jPanel1.add(js);             
-    jPanel1.setLayout(new GridLayout());     
-    this.pack();     
-    
-         
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1PropertyChange
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+     
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -290,11 +269,12 @@ public class ReturnConsole extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
- LinkedHashMap<String,Long> distNames = new LinkedHashMap<>();
+    LinkedHashMap<String,Long> distNames = new LinkedHashMap<>();
+    JTable jtable = null;
  
     public void clearUI(){
         this.jPanel1.removeAll();
@@ -313,4 +293,36 @@ public class ReturnConsole extends javax.swing.JFrame {
         }
     }
     
+    private class CheckBoxCellEditor
+extends AbstractCellEditor
+implements TableCellEditor {
+protected JCheckBox checkBox;
+ 
+public CheckBoxCellEditor() {
+checkBox = new JCheckBox();
+checkBox.setHorizontalAlignment(SwingConstants.CENTER);
+checkBox.setBackground(Color.white);
+}
+ 
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,int row,
+        int column) {
+
+        checkBox.setSelected(((Boolean) value).booleanValue());
+
+        Component c =  table.getDefaultRenderer(Boolean.class).
+                getTableCellRendererComponent(table,value,isSelected,false,row,column);
+
+        if (c != null) {
+            checkBox.setBackground(c.getBackground());
+        }
+
+        return checkBox;
+        }
+
+        public Object getCellEditorValue() {
+                return Boolean.valueOf(checkBox.isSelected());
+          }
+    }
+ 
+   
 }
