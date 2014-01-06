@@ -71,6 +71,7 @@ public class InterfaceController {
    
    public static  void buildReturnConsole(){
      LinkedHashMap distNames = connectorDAO.getDistributorMap();
+     returnConsole = new ReturnConsole();
      
     returnConsole.initValues(distNames);
     returnConsole.setLocationRelativeTo(null);  

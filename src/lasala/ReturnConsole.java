@@ -7,10 +7,12 @@ package lasala;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.EventObject;
 import java.util.LinkedHashMap;
 import java.util.List;
 import javax.persistence.Column;
@@ -18,6 +20,7 @@ import javax.swing.AbstractButton;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
@@ -187,9 +190,36 @@ public class ReturnConsole extends javax.swing.JFrame {
      this.jtable = table;
      JScrollPane js = new JScrollPane(table);
        
-  //EDITAR CELL EDITOR PARA LA 7 COLMNA
-  table.getColumnModel().getColumn(7).setCellEditor(  new CheckBoxCellEditor());
-  
+ 
+    table.getColumnModel().getColumn(7).setCellEditor(  new CheckBoxCellEditor());
+    this.jtable.addMouseListener(new java.awt.event.MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+              jtable.editCellAt(jtable.getEditingRow(), 7);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+              jtable.editCellAt(jtable.getEditingRow(), 7);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+              jtable.editCellAt(jtable.getEditingRow(), 7);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+               jtable.editCellAt(jtable.getEditingRow(), 7);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+              jtable.editCellAt(jtable.getEditingRow(), 7);
+            }
+        });
+    
     jPanel1.updateUI();
     jPanel1.add(js);             
     jPanel1.setLayout(new GridLayout());     
@@ -200,7 +230,9 @@ public class ReturnConsole extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.jtable=null;
         this.dispose();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -227,7 +259,26 @@ public class ReturnConsole extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1PropertyChange
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     
+      
+        if (this.jtable==null)    JOptionPane.showMessageDialog(null, "No hay ningún libro seleccionado");    
+        
+        else{
+            int contador = 0;
+            this.jtable.getColumnModel().getColumn(7).setCellEditor(  new CheckBoxCellEditor());
+            int rows = this.jtable.getRowCount(); 
+            
+            for (int i=0; i<rows; i++){ System.out.println("fila: " + i + " valor: " + (this.jtable.getValueAt(i, 7)));
+                if (this.jtable.getValueAt(i, 7)==true){
+                    long id = Long.parseLong(this.jtable.getValueAt(i, 6).toString());
+                    contador++;
+                    InterfaceController.changeBookStatus( id, EnumeratedStatus.RETURNED);
+                }
+            }
+         JOptionPane.showMessageDialog(null, "Se han devuelto " + contador + " libros");
+         this.jtable=null;
+         this.dispose();
+        }
+        
         
     }//GEN-LAST:event_jButton3ActionPerformed
     
@@ -293,22 +344,25 @@ public class ReturnConsole extends javax.swing.JFrame {
         }
     }
     
-    private class CheckBoxCellEditor
-extends AbstractCellEditor
-implements TableCellEditor {
-protected JCheckBox checkBox;
- 
-public CheckBoxCellEditor() {
-checkBox = new JCheckBox();
-checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-checkBox.setBackground(Color.white);
-}
+    private class CheckBoxCellEditor extends AbstractCellEditor implements TableCellEditor {
+
+       
+        protected JCheckBox checkBox;
+       
+        public CheckBoxCellEditor() {
+        checkBox = new JCheckBox();
+        checkBox.setHorizontalAlignment(SwingConstants.CENTER);
+        checkBox.setBackground(Color.white);
+        }
  
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,int row,
         int column) {
 
-        checkBox.setSelected(((Boolean) value).booleanValue());
-
+        checkBox.setSelected((boolean)value);
+  
+        if((boolean)value==true)  table.setValueAt(true, row, column);
+       else  table.setValueAt(false, row, column);
+       
         Component c =  table.getDefaultRenderer(Boolean.class).
                 getTableCellRendererComponent(table,value,isSelected,false,row,column);
 
@@ -322,6 +376,7 @@ checkBox.setBackground(Color.white);
         public Object getCellEditorValue() {
                 return Boolean.valueOf(checkBox.isSelected());
           }
+         
     }
  
    

@@ -48,5 +48,11 @@ public class MyTableModel  extends AbstractTableModel{
          
      }
      
+     public void setValueAt(Object value, int rowIndex, int columnIndex){
+      
+         this.searchResults.set(rowIndex*8 + 7, value);    
+         fireTableCellUpdated(rowIndex, columnIndex);
+     }
+     
      
 }
