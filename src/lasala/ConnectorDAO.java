@@ -177,7 +177,7 @@ public class ConnectorDAO {
             beginOperation(); 
             Criteria cr =sesion.createCriteria(Libro.class);
              
-            cr.add(Restrictions.eq("distribuidora.id",Long.parseLong("1")));
+            cr.add(Restrictions.eq("distribuidora.id",dist));
             cr.add(Restrictions.eq("status", EnumeratedStatus.AVAILABLE));
                       
            listLibros=cr.list();
@@ -304,7 +304,7 @@ public class ConnectorDAO {
              sesion.close(); 
         }  
         if (returnedDistributorsList.isEmpty()) return null;
-        return returnedDistributorsList.get(1).getId(); 
+        return returnedDistributorsList.get(0).getId(); 
         
     }
     

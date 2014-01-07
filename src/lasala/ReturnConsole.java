@@ -183,7 +183,7 @@ public class ReturnConsole extends javax.swing.JFrame {
        names.add("Devolver");
                  
     String selectedDistributor = this.jComboBox1.getSelectedItem().toString();
-     results = InterfaceController.getBooksByDistributor(selectedDistributor);  
+    results = InterfaceController.getBooksByDistributor(selectedDistributor);  
        
      MyTableModel tmod = new MyTableModel(results, names);
      final JTable table = new JTable(tmod);
