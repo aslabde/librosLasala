@@ -319,7 +319,7 @@ public class InterfaceController {
    }
    
    public static void newBackUp() throws IOException{
-       String partial_path = new String("C:\\Users\\Usuario\\Dropbox\\PruebaDB\\");
+       String partial_path = new String("C:\\Users\\Cris\\Dropbox\\copiaDB\\");
        StringBuilder sb = new StringBuilder();
        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
        Date date = new Date();
