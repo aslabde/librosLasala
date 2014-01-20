@@ -4,6 +4,7 @@
  */
 package lasala;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.sql.SQLException;

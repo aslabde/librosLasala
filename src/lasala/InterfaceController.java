@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 import org.hibernate.HibernateException;
 
 /**
@@ -69,7 +70,7 @@ public class InterfaceController {
     newDistributorConsole.setVisible(true);
     }
    
-   public static  void buildReturnConsole(){
+   public static  void buildReturnConsole() throws JRException{
      LinkedHashMap distNames = connectorDAO.getDistributorMap();
      returnConsole = new ReturnConsole();
      
@@ -253,6 +254,12 @@ public class InterfaceController {
             }
      }                
            return parsedResults;
+       
+   }
+   public static Libro getBookById(long id){
+       Libro book = connectorDAO.getLibro(id);
+       
+       return book;
        
    }
    

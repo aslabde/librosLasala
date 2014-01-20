@@ -1,6 +1,9 @@
 package lasala;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
 
 /*
  * To change this template, choose Tools | Templates
@@ -187,7 +190,11 @@ public class MainConsole extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        InterfaceController.buildReturnConsole();        // TODO add your handling code here:
+        try {
+            InterfaceController.buildReturnConsole();        // TODO add your handling code here:
+        } catch (JRException ex) {
+            Logger.getLogger(MainConsole.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

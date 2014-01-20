@@ -15,6 +15,8 @@ import java.awt.event.MouseEvent;
 import java.util.EventObject;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.swing.AbstractButton;
 import javax.swing.AbstractCellEditor;
@@ -27,6 +29,16 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import javax.servlet.Servlet;
 
 /**
  *
@@ -272,9 +284,15 @@ public class ReturnConsole extends javax.swing.JFrame {
                     long id = Long.parseLong(this.jtable.getValueAt(i, 6).toString());
                     contador++;
                     InterfaceController.changeBookStatus( id, EnumeratedStatus.RETURNED);
+                    this.bds.addBook(InterfaceController.getBookById(id));
                 }
             }
          JOptionPane.showMessageDialog(null, "Se han devuelto " + contador + " libros");
+            try {
+                this.displayReport();
+            } catch (JRException ex) {
+                Logger.getLogger(ReturnConsole.class.getName()).log(Level.SEVERE, null, ex);
+            }
          this.jtable=null;
          this.dispose();
         }
@@ -326,15 +344,19 @@ public class ReturnConsole extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     LinkedHashMap<String,Long> distNames = new LinkedHashMap<>();
     JTable jtable = null;
- 
+    JasperReport reporte;
+    BookDataSource bds;
+    
     public void clearUI(){
         this.jPanel1.removeAll();
       
     }
    
-    public void initValues(LinkedHashMap<String, Long> distributors){
+    public void initValues(LinkedHashMap<String, Long> distributors) throws JRException{
        List<String> tempNames= new ArrayList(distributors.keySet());
         this.distNames = distributors;
+        this.bds = new BookDataSource();
+        this.reporte = (JasperReport) JRLoader.loadObject("report2.jasper");
        
         this.jComboBox1.removeAllItems();
         this.jComboBox1.addItem("Distribuidora.....");
@@ -378,6 +400,13 @@ public class ReturnConsole extends javax.swing.JFrame {
           }
          
     }
- 
+  
+    private void displayReport () throws JRException{
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, bds);
+        JRExporter exporter = new JRPdfExporter(); 
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File("reporte2PDF_2.pdf")); 
+        exporter.exportReport();
+    }
    
 }

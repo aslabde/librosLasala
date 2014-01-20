@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="345e011a-0834-4948-a702-ac95663817cf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="editorial" class="java.lang.String"/>
+	<field name="netoCompra" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="-13" width="555" height="92" backcolor="#006699" uuid="d42e686d-99d7-4343-b7a8-e0b25c28c78b"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="39820ffa-0335-4754-bb79-24d449421031"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[LASALA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="149" height="20" forecolor="#FFFFFF" uuid="c0bde92c-575e-4422-b32b-11355c76a673"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Albarán de devolución]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="22" width="117" height="38" uuid="c58f8fe7-6f66-45ca-9214-ea6e36570e08"/>
+				<textElement>
+					<font fontName="Verdana" size="16" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[TÍTULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="23" width="122" height="38" uuid="3a87e4b0-fb9b-4cf4-abe2-36cefc331647"/>
+				<textElement>
+					<font fontName="Verdana" size="16" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[EDITORIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="22" width="100" height="38" uuid="cf6908ff-eefe-4528-89b6-cd02f285fc41"/>
+				<textElement>
+					<font fontName="Verdana" size="16" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="52" width="100" height="20" uuid="b528e3ac-5376-4af8-b3c3-6ca46fc530de"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="52" width="100" height="20" uuid="5d95d044-a28c-42a8-af6c-505bf3b2110d"/>
+				<textFieldExpression><![CDATA[$F{editorial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="52" width="100" height="20" uuid="19d3b419-f966-4d2f-bee6-9bf70c5d1073"/>
+				<textFieldExpression><![CDATA[$F{netoCompra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
